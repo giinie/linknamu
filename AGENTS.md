@@ -1,9 +1,9 @@
 # AGENTS.md
 
 Engine-independent project core for **링크나무 (linknamu)**.
-A link-in-bio web app planned on Next.js 16 (App Router) / TypeScript / Tailwind CSS /
-MongoDB Atlas, deployed to Vercel. Status: pre-scaffold — the repo holds only the
-product brief, no application code or manifest yet.
+A link-in-bio web app on Next.js 16 (App Router) / React 19 / TypeScript / Tailwind CSS 4,
+with MongoDB Atlas planned for click counts, deployed to Vercel. Status: freshly
+scaffolded with `create-next-app` 16.4.0 — only the default starter page exists.
 
 This file is the **canonical home** for the facts every coding agent needs (project
 context, build/test commands, architecture, gotchas). Claude Code reads it via the
@@ -29,29 +29,59 @@ Layout reference: `wireframe.png`.
 
 ## Common Commands
 
-None yet — there is no `package.json`, lockfile, or source tree. Build, run, test,
-single-test, and lint commands are all **absent**. Record each one here, verified by
-running it, when the project is scaffolded.
+Package manager: **pnpm** (`pnpm-lock.yaml`; `package.json` `packageManager` pins
+`pnpm@12.10.1`). Verified 2026-10-12 on Node.js 24.21.0.
 
-Package manager: undecided — no lockfile exists. Whichever tool scaffolds the project
-writes the lockfile, and that lockfile then decides the package manager for everyone.
+```bash
+# Install dependencies
+pnpm install
+
+# Build — verified green (routes / and /_not-found, both static)
+pnpm build
+
+# Run locally (http://localhost:3000)
+# verified: Turbopack, ready in ~3s, GET / 200
+pnpm dev
+
+# Run the full test suite
+# none — no test framework is installed yet
+
+# Run a single test file / single test
+# none
+
+# Lint (ESLint 9 flat config, eslint-config-next core-web-vitals + typescript)
+# verified: 0 errors
+pnpm lint
+```
 
 ### Environment
 
-- Runtime: Next.js 16 (App Router) + TypeScript is the stated stack (product brief);
-  no Node.js or framework version is pinned in any manifest yet.
+- Runtime: Node.js — no `engines` pin; verified on 24.21.0. Framework versions are
+  pinned in `package.json`: `next` 16.4.0, `react` / `react-dom` 19.3.0; dev deps
+  TypeScript ^5, Tailwind CSS ^4 (via `@tailwindcss/turbopack`), ESLint ^9.
+- `next.config.ts` enables `cacheComponents` and `partialPrefetching` (scaffold
+  defaults) and routes `*.css` through the `@tailwindcss/turbopack` loader.
+- `pnpm-workspace.yaml` sets `allowBuilds` false for `sharp` and `unrs-resolver`
+  (their install scripts do not run).
 - Local config: environment variables live in `.env.local`, which must **never** be
-  committed. It will hold the MongoDB Atlas connection string. No `.gitignore` exists
-  yet — add `.env*.local` to it when scaffolding.
+  committed (`.gitignore` ignores `.env*`). It will hold the MongoDB Atlas connection
+  string.
 - Infrastructure: MongoDB Atlas (click counts); deploy target Vercel. No internal
   registry or network constraints.
 
 ## Architecture — Big Picture
 
-No source code exists yet. Conventions fixed by the product brief:
+Current tree is the `create-next-app` starter:
 
-- Next.js App Router project, TypeScript only.
-- UI components go under `src/components/`.
+- `src/app/` — App Router root: `layout.tsx`, `page.tsx` (starter page), `globals.css`
+  (Tailwind entry), `favicon.ico`.
+- `public/` — starter SVG assets.
+- Import alias `@/*` → `src/*` (`tsconfig.json`).
+
+Conventions fixed by the product brief:
+
+- TypeScript only.
+- UI components go under `src/components/` (not created yet).
 - Mobile-first responsive design (Tailwind breakpoints scale up from mobile).
 - Data access: MongoDB Atlas, used only for per-link click counts; profile and link
   data storage is not yet decided.
@@ -73,3 +103,13 @@ No source code exists yet. Conventions fixed by the product brief:
 - `PRD.md` — product requirements (Korean).
 - `wireframe.png` — page layout wireframe.
 - TODO(init): issue tracker / design docs — none exist yet.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

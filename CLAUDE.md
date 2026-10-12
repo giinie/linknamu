@@ -36,10 +36,11 @@ Project-specific skill usage:
   machine) are not used in this project.
 - **Doc sync**: The engine-independent core lives in `AGENTS.md`. Update **`AGENTS.md`**
   (not this file) when any of these change:
-  - files: `package.json`, the lockfile, `next.config.*`, `tsconfig.json`,
-    `.env.example` (if added), `.gitignore`, `PRD.md`;
+  - files: `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `next.config.ts`,
+    `tsconfig.json`, `eslint.config.mjs`, `.env.example` (if added), `.gitignore`, `PRD.md`;
   - directories (an addition can falsify the Architecture section with no quoted
-    file changing): `src/app/`, `src/components/`, and any new top-level `src/` directory.
+    file changing): `src/app/`, `src/components/`, `public/`, and any new top-level
+    `src/` directory.
 
 ### Instruction File Boundary (`AGENTS.md` ↔ `CLAUDE.md`)
 
