@@ -32,6 +32,8 @@ Project-specific skill usage:
   - user-supplied link URLs rendered as `href` (block `javascript:` and similar schemes);
   - new dependencies.
 - **New business logic**: write tests first manually using the project's test framework.
+  None is installed yet — before the first business-logic change, propose one to the
+  user (adding it is a new dependency, so the security review above applies).
 - **Code review**: use built-in `/code-review`. External AI CLIs (code leaves the
   machine) are not used in this project.
 - **Doc sync**: The engine-independent core lives in `AGENTS.md`. Update **`AGENTS.md`**

@@ -102,7 +102,7 @@ Conventions fixed by the product brief:
 
 - `PRD.md` — product requirements (Korean).
 - `wireframe.png` — page layout wireframe.
-- TODO(init): issue tracker / design docs — none exist yet.
+- Issue tracker / design docs: none yet.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
