@@ -57,7 +57,8 @@ pnpm lint
 ### Environment
 
 - Runtime: Node.js — no `engines` pin; verified on 24.21.0. Framework versions are
-  pinned in `package.json`: `next` 16.4.0, `react` / `react-dom` 19.3.0; dev deps
+  pinned in `package.json`: `next` 16.4.0, `react` / `react-dom` 19.3.0, `pretendard`
+  1.3.9 (Korean UI font, self-hosted via `next/font/local` in `src/app/layout.tsx`); dev deps
   TypeScript ^5, Tailwind CSS ^4 (via `@tailwindcss/turbopack`), ESLint ^9.
 - `next.config.ts` enables `cacheComponents` and `partialPrefetching` (scaffold
   defaults) and routes `*.css` through the `@tailwindcss/turbopack` loader.
