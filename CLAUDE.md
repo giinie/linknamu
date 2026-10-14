@@ -41,8 +41,8 @@ Project-specific skill usage:
   - files: `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `next.config.ts`,
     `tsconfig.json`, `eslint.config.mjs`, `.env.example` (if added), `.gitignore`, `PRD.md`;
   - directories (an addition can falsify the Architecture section with no quoted
-    file changing): `src/app/`, `src/components/`, `public/`, and any new top-level
-    `src/` directory.
+    file changing): `src/app/`, `src/components/`, and any new top-level `src/`
+    directory.
 
 ### Instruction File Boundary (`AGENTS.md` ↔ `CLAUDE.md`)
 
