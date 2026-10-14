@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -24,7 +25,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ko"
       className={`${pretendard.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning // themeScript가 hydration 전에 data-theme을 설정
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import LinkList from "@/components/LinkList";
+import ThemeToggle from "@/components/ThemeToggle";
 
 // 더미 데이터 — 실 데이터는 추후 적용 예정
 const profile = {
@@ -25,6 +26,7 @@ export default function Home() {
         {profile.bio}
       </p>
       <LinkList />
+      <ThemeToggle />
     </main>
   );
 }
