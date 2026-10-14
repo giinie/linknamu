@@ -62,7 +62,7 @@ pnpm lint
 - `pnpm-workspace.yaml` sets `allowBuilds` false for `sharp` and `unrs-resolver`
   (their install scripts do not run).
 - Local config: environment variables live in `.env.local`, which must **never** be
-  committed (`.gitignore` ignores `.env*`). It holds `MONGODB_URI` (MongoDB Atlas
+  committed (`.gitignore` ignores `.env` and `.env.*`, except `.env.example`). It holds `MONGODB_URI` (MongoDB Atlas
   connection string); the deployed Vercel project needs the same variable.
 - Infrastructure: MongoDB Atlas (click counts); deploy target Vercel. No internal
   registry or network constraints.
