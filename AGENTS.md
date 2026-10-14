@@ -2,8 +2,7 @@
 
 Engine-independent project core for **링크나무 (linknamu)**.
 A link-in-bio web app on Next.js 16 (App Router) / React 19 / TypeScript / Tailwind CSS 4,
-with MongoDB Atlas planned for click counts, deployed to Vercel. Status: freshly
-scaffolded with `create-next-app` 16.4.0 — only the default starter page exists.
+with MongoDB Atlas planned for click counts, deployed to Vercel.
 
 This file is the **canonical home** for the facts every coding agent needs (project
 context, build/test commands, architecture, gotchas). Claude Code reads it via the
@@ -56,10 +55,7 @@ pnpm lint
 
 ### Environment
 
-- Runtime: Node.js — no `engines` pin; verified on 24.21.0. Framework versions are
-  pinned in `package.json`: `next` 16.4.0, `react` / `react-dom` 19.3.0, `pretendard`
-  1.3.9 (Korean UI font, self-hosted via `next/font/local` in `src/app/layout.tsx`); dev deps
-  TypeScript ^5, Tailwind CSS ^4 (via `@tailwindcss/turbopack`), ESLint ^9.
+- Runtime: Node.js — no `engines` pin; verified on 24.21.0.
 - `next.config.ts` enables `cacheComponents` and `partialPrefetching` (scaffold
   defaults) and routes `*.css` through the `@tailwindcss/turbopack` loader.
 - `pnpm-workspace.yaml` sets `allowBuilds` false for `sharp` and `unrs-resolver`
@@ -71,13 +67,6 @@ pnpm lint
   registry or network constraints.
 
 ## Architecture — Big Picture
-
-Current tree is the `create-next-app` starter:
-
-- `src/app/` — App Router root: `layout.tsx`, `page.tsx` (starter page), `globals.css`
-  (Tailwind entry), `favicon.ico`.
-- `public/` — starter SVG assets.
-- Import alias `@/*` → `src/*` (`tsconfig.json`).
 
 Conventions fixed by the product brief:
 
