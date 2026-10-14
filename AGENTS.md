@@ -2,7 +2,7 @@
 
 Engine-independent project core for **링크나무 (linknamu)**.
 A link-in-bio web app on Next.js 16 (App Router) / React 19 / TypeScript / Tailwind CSS 4,
-with MongoDB Atlas planned for click counts, deployed to Vercel.
+with MongoDB Atlas for click counts, deployed to Vercel.
 
 This file is the **canonical home** for the facts every coding agent needs (project
 context, build/test commands, architecture, gotchas). Claude Code reads it via the
@@ -35,18 +35,19 @@ Package manager: **pnpm** (`pnpm-lock.yaml`; `package.json` `packageManager` pin
 # Install dependencies
 pnpm install
 
-# Build — verified green (routes / and /_not-found, both static)
+# Build — verified green (/ and /_not-found static, /api/clicks dynamic)
 pnpm build
 
 # Run locally (http://localhost:3000)
 # verified: Turbopack, ready in ~3s, GET / 200
 pnpm dev
 
-# Run the full test suite
-# none — no test framework is installed yet
+# Run the full test suite (bun test runner; files: src/**/*.test.ts)
+pnpm test
 
 # Run a single test file / single test
-# none
+bun test src/lib/links.test.ts
+bun test -t "<test name pattern>"
 
 # Lint (ESLint 9 flat config, eslint-config-next core-web-vitals + typescript)
 # verified: 0 errors
@@ -61,8 +62,8 @@ pnpm lint
 - `pnpm-workspace.yaml` sets `allowBuilds` false for `sharp` and `unrs-resolver`
   (their install scripts do not run).
 - Local config: environment variables live in `.env.local`, which must **never** be
-  committed (`.gitignore` ignores `.env*`). It will hold the MongoDB Atlas connection
-  string.
+  committed (`.gitignore` ignores `.env*`). It holds `MONGODB_URI` (MongoDB Atlas
+  connection string); the deployed Vercel project needs the same variable.
 - Infrastructure: MongoDB Atlas (click counts); deploy target Vercel. No internal
   registry or network constraints.
 
@@ -71,10 +72,13 @@ pnpm lint
 Conventions fixed by the product brief:
 
 - TypeScript only.
-- UI components go under `src/components/` (not created yet).
+- UI components go under `src/components/`; shared modules under `src/lib/`.
 - Mobile-first responsive design (Tailwind breakpoints scale up from mobile).
-- Data access: MongoDB Atlas, used only for per-link click counts; profile and link
-  data storage is not yet decided.
+- Data access: MongoDB Atlas, used only for per-link click counts (db `linknamu`,
+  collection `clicks`, docs `{ _id: <link id>, count }`). `src/app/api/clicks/route.ts`
+  serves GET (all counts) and POST `{ id }` (increment); ids are validated against the
+  allowlist in `src/lib/links.ts`. Profile and link data are still hardcoded
+  (`src/app/page.tsx`, `src/lib/links.ts`).
 
 ## Project-Specific Gotchas
 
