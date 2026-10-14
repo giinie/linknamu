@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LinkList from "@/components/LinkList";
 
 // 더미 데이터 — 실 데이터는 추후 적용 예정
 const profile = {
@@ -6,12 +7,6 @@ const profile = {
   bio: "풀스택 개발자 | 요즘에는 AI 개발에 관심이 많아요",
   image: "https://placehold.co/128x128/orange/white",
 };
-
-const links = [
-  { label: "🐙 GitHub", href: "https://github.com/giinie" },
-  { label: "💼 LinkedIn", href: "https://www.linkedin.com" },
-  { label: "📧 이메일", href: "mailto:giinie@bizmeka.com" },
-];
 
 export default function Home() {
   return (
@@ -29,20 +24,7 @@ export default function Home() {
       <p className="mt-2 text-center text-[15px] leading-relaxed text-stone-600 dark:text-stone-400">
         {profile.bio}
       </p>
-      <ul className="mt-12 flex w-full flex-col gap-5">
-        {links.map((link) => (
-          <li key={link.label}>
-            <a
-              className="block w-full rounded-3xl border border-white/60 bg-white/45 px-6 py-4 text-center font-medium shadow-[0_4px_20px_-6px_rgba(120,70,40,0.15)] backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:bg-white/60 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <LinkList />
     </main>
   );
 }
